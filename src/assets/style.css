@@ -1,0 +1,69 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.hero{
+    background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9)), url(../assets/bg.jpg);
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.add-figure{
+    padding: 3rem;
+    /* width: 70vw; */
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.list{
+    margin: 5rem 0;
+    width: 100%;
+}
+
+.list .list-item{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.list-item:not(:last-child){
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.list-item{
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+
+.list .list-item .value-action{
+    display: flex;
+    align-items: center;
+}
+.list .list-item .value-action .amount,
+.list .list-item .value-action .action{
+    transition: all .3s linear;
+    line-height: 1.5;
+}
+.list .list-item .value-action .action{
+    font-size: 1rem;
+    text-decoration: none;
+    display: none;
+    cursor: pointer;
+}
+.list .list-item .value-action .amount{
+    display: inline-block;
+}
+.list .list-item:hover .amount{
+    margin-right: 1rem;
+}    
+.list .list-item:hover .action{
+    display: inline-block;
+}
+
