@@ -50,24 +50,6 @@ export default {
   data () {
     return {
       records: [
-        {
-          id: '1',
-          description: 'Food',
-          amount: 600,
-          type: 'expense'
-        },
-        {
-          id: '2',
-          description: 'Design',
-          amount: 2000,
-          type: 'income'
-        },
-        {
-          id: '3',
-          description: 'salary',
-          amount: 1500,
-          type: 'income'
-        }
       ]
     }
   },
@@ -97,13 +79,24 @@ export default {
     }
   },
   methods: {
+    initStorage () {
+      const init = []
+      if (window.localStorage.getItem('records') === null) {
+        window.localStorage.setItem('records', JSON.stringify(init))
+        this.records = []
+      } else {
+        this.records = JSON.parse(window.localStorage.getItem('records'))
+      }
+    },
     getNewAmount (type) {
       let newValue = 0
-      this.records.forEach(record => {
-        if (record.type === type) {
-          newValue += record.amount
-        }
-      })
+      if (this.records.length !== 0) {
+        this.records.forEach(record => {
+          if (record.type === type) {
+            newValue += record.amount
+          }
+        })
+      }
       return newValue
     },
     addRecord (item) {
@@ -116,11 +109,13 @@ export default {
           type: item.type
         }
       )
+      window.localStorage.setItem('records', JSON.stringify(this.records))
     },
     deleteRecord (id) {
       this.records = this.records.filter(record => {
         return record.id !== id
       })
+      window.localStorage.setItem('records', JSON.stringify(this.records))
     }
   },
   created () {
@@ -130,6 +125,9 @@ export default {
     eventBus.$on('deleteRecord', (data) => {
       this.deleteRecord(data.id)
     })
+  },
+  mounted () {
+    this.initStorage()
   }
 }
 </script>
